@@ -40,9 +40,11 @@ Then(/^I see (.*)$/, async (message) => {
     // invalid username or password
     await expect($("//h1[normalize-space()='Error!']")).toBeExisting();
     await expect($("//h1[normalize-space()='Error!']")).toHaveTextContaining(message);
+    await TransferPage.logout();
   } else {
     // valid username or password
     await expect($("//h1[normalize-space()='Transfer Complete!']")).toBeExisting();
     await expect($("//h1[normalize-space()='Transfer Complete!']")).toHaveTextContaining(message);
+    await TransferPage.logout();
   }
 });
