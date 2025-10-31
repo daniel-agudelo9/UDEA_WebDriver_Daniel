@@ -38,11 +38,11 @@ When(/^I write the (.*) to transfer from the account (.*) to the account (.*) an
 Then(/^I see (.*)$/, async (message) => {
   if (message == "Error!") {
     // invalid username or password
-    await expect($('//h1[normalize-space()='Error!']')).toBeExisting();
-    await expect($('//h1[normalize-space()='Error!']')).toHaveTextContaining(message);
+    await expect($("//h1[normalize-space()='Error!']")).toBeExisting();
+    await expect($("//h1[normalize-space()='Error!']")).toHaveTextContaining(message);
   } else {
     // valid username or password
-    await expect($('//h1[normalize-space()='Transfer Complete!']')).toBeExisting();
-    await expect($('//h1[normalize-space()='Transfer Complete!']')).toHaveTextContaining(message);
+    await expect($("//h1[normalize-space()='Transfer Complete!']")).toBeExisting();
+    await expect($("//h1[normalize-space()='Transfer Complete!']")).toHaveTextContaining(message);
   }
 });
