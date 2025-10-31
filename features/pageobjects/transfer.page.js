@@ -21,9 +21,19 @@ class TransferPage extends Page {
     }
 
     async transfer (amount, fromAccount, toAccount) {
+        await expect(this.inputAmount).toBeExisting();
+        await this.inputAmount.waitForEnabled();
         await this.inputAmount.setValue(amount);
+
+        await expect(this.inputFromAccount).toBeExisting();
+        await this.inputFromAccount.waitForEnabled();        
         await this.inputFromAccount.selectByAttribute('value', fromAccount);
+
+        await expect(this.inputToAccount).toBeExisting();
+        await this.inputToAccount.waitForEnabled();        
         await this.inputToAccount.selectByAttribute('value', toAccount);  
+
+        await expect(this.btnTransfer).toBeExisting();        
         await this.btnTransfer.click();
     }
 
