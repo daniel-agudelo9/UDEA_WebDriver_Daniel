@@ -1,45 +1,41 @@
+// features/pageobjects/transfer.page.js
 import Page from './page.js';
 
 class TransferPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    get inputAmount () {
-        return $("//input[@id='amount']");
+
+    get amountField() {
+        return $("#amount");
     }
 
-    get inputFromAccount () {
-        return $("//select[@id='fromAccountId']");
+    get fromAccountSelect() {
+        return $("#fromAccountId");
     }
 
-    get inputToAccount () {
-        return $("//select[@id='toAccountId']");
+    get toAccountSelect() {
+        return $("#toAccountId");
     }
 
-    get btnTransfer () {
+    get confirmTransferButton() {
         return $("//input[@value='Transfer']");
     }
 
-    async transfer (amount, fromAccount, toAccount) {
-        await expect(this.inputAmount).toBeExisting();
-        await this.inputAmount.waitForEnabled();
-        await this.inputAmount.setValue(amount);
+    async transfer(amount, fromAccount, toAccount) {
+        await this.amountField.waitForDisplayed();
+        await this.amountField.setValue(amount);
 
-        await expect(this.inputFromAccount).toBeExisting();
-        await this.inputFromAccount.waitForEnabled();        
-        await this.inputFromAccount.selectByAttribute('value', fromAccount);
+        await this.fromAccountSelect.waitForEnabled();
+        await this.fromAccountSelect.selectByAttribute("value", fromAccount);
 
-        await expect(this.inputToAccount).toBeExisting();
-        await this.inputToAccount.waitForEnabled();        
-        await this.inputToAccount.selectByAttribute('value', toAccount);  
+        await this.toAccountSelect.waitForEnabled();
+        await this.toAccountSelect.selectByAttribute("value", toAccount);
 
-        await expect(this.btnTransfer).toBeExisting();        
-        await this.btnTransfer.click();
+        await this.confirmTransferButton.waitForClickable();
+        await this.confirmTransferButton.click();
     }
 
-  open() {
-    return super.open('transfer');
-  }
+    open() {
+        return super.open('transfer');
+    }
 }
 
 export default new TransferPage();
